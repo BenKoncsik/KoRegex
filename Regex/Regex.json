@@ -1,0 +1,26 @@
+[
+  {
+    "Name": "AnotherPattern",
+    "FileType": "", //when is empity all file tpe load
+    "RegexItems": [
+      {
+        "Pattern": "YourOtherRegexHere",
+        "Replacement": "YourOtherReplacementHere"
+      }
+    ]
+  },
+  {
+    "Name": "AnotherPattern2",
+    "FileType": "cs", //only cs type file load
+    "RegexItems": [
+      {
+        "Pattern": "YourOtherRegexHere",
+        "Replacement": "YourOtherReplacementHere"
+      },
+      {
+        "Pattern": "YourOtherRegexHere2",
+        "Replacement": "YourOtherReplacementHere2"
+      }
+    ]
+  }
+]
