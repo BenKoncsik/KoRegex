@@ -8,8 +8,9 @@ KoRegex is a C# based file processing utility designed to apply regex (regular e
 
 ### How to Use
 1. **Source Directory (`-path` or `-p`)**: Specify the directory where the program will perform file operations. Usage: `-path [directory path]` or `-p [directory path]`.
-2. **Output Directory (-o or -output)**: Specify the target directory for the program's output. If left empty, the output will default to a Debug subdirectory within the source directory. Usage: `-o [directory path]` or `-output [directory path]`. 
-3. **Regex JSON File (`-regexjson` or `-rj`)**: Define the path to a JSON file containing regex patterns and replacements. Usage: `-regexjson [file path]` or `-rj [file path]`.
+2. **Output Directory (`-o` or `-output`)**: Specify the target directory for the program's output. If left empty, the output will default to a Debug subdirectory within the source directory. Usage: `-o [directory path]` or `-output [directory path]`. 
+3. **Regex Name Selection (`-rn` or `-regexname`)**: This new switch allows the user to select a specific regex pattern from the provided JSON file by its name. If the specified name does not exist, the user must manually choose from the available options. Usage: `-rn [regex name]` or `-regexname [regex name]`. 
+4. **Regex JSON File (`-regexjson` or `-rj`)**: Define the path to a JSON file containing regex patterns and replacements. Usage: `-regexjson [file path]` or `-rj [file path]`.
 
 The program reads the specified JSON file to determine the regex patterns to apply to the files in the source directory.
 
@@ -20,7 +21,8 @@ A KoRegex egy C# alapú fájl-feldolgozó eszköz, amely regex (reguláris kifejezése
 
 ### Használat
 1. **Forráskönyvtár (`-path` vagy `-p`)**: Adja meg azt a könyvtárat, ahol a program a fájlmûveleteket végzi. Használat: `-path [könyvtár útvonala]` vagy `-p [könyvtár útvonala]`.
-3.**Kimeneti Könyvtár (-o vagy -output)**: Adja meg a program kimeneti adatainak könyvtárát. Ha üresen hagyja, az alapértelmezett kimenet a forráskönyvtár Debug almappájába kerül. Használat: `-o [könyvtár útvonala]` vagy `-output [könyvtár útvonala]`.
-2. **Regex JSON Fájl (`-regexjson` vagy `-rj`)**: Határozza meg a regex mintákat és cseréket tartalmazó JSON fájl útvonalát. Használat: `-regexjson [fájl útvonala]` vagy `-rj [fájl útvonala]`.
+2. **Kimeneti Könyvtár (`-o` vagy `-output`)**: Adja meg a program kimeneti adatainak könyvtárát. Ha üresen hagyja, az alapértelmezett kimenet a forráskönyvtár Debug almappájába kerül. Használat: `-o [könyvtár útvonala]` vagy `-output [könyvtár útvonala]`.
+3. **Regex Név Kiválasztása (`-rn` vagy `-regexname`)**: Ez az új kapcsoló lehetõvé teszi a felhasználó számára, hogy a megadott JSON fájlból a regex minták közül egy adott nevût válasszon ki. Ha a megadott név nem létezik, a felhasználónak manuálisan kell választania a rendelkezésre álló opciók közül. Használat: `-rn [regex név]` vagy `-regexname [regex név]`.
+4. **Regex JSON Fájl (`-regexjson` vagy `-rj`)**: Határozza meg a regex mintákat és cseréket tartalmazó JSON fájl útvonalát. Használat: `-regexjson [fájl útvonala]` vagy `-rj [fájl útvonala]`.
 
 A program olvassa a megadott JSON fájlt, hogy meghatározza a forráskönyvtár fájljaira alkalmazandó regex mintákat.

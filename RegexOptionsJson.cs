@@ -1,7 +1,7 @@
 ﻿
 using Newtonsoft.Json;
 
-namespace CsFileProcessor
+namespace KoRegex
 {
     public class RegexOptionsJson
     {

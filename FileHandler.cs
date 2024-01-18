@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CsFileProcessor
+namespace KoRegex
 {
     public class FileHandler
     {

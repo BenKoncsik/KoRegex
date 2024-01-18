@@ -1,13 +1,14 @@
 ﻿using Newtonsoft.Json;
 
 
-namespace CsFileProcessor
+namespace KoRegex
 {
     public class Start
     {
         private static string jsonFilePath = "./Regex/Regex.json";
         private static string sourceDirectory = "";
         private static string targetDirectory = "";
+        private static string regexName = "";
         public Start(string[] args) {
             foreach (string arg in args)
             {
@@ -25,6 +26,12 @@ namespace CsFileProcessor
                 {
                     int index = Array.IndexOf(args, arg);
                     targetDirectory = index + 1 < args.Length ? args[index + 1] : "";
+                }
+
+                else if (arg.StartsWith("-rn") || arg.StartsWith("-regexname"))
+                {
+                    int index = Array.IndexOf(args, arg);
+                    regexName = index + 1 < args.Length ? args[index + 1] : "";
                 }
             }
 
@@ -56,8 +63,20 @@ namespace CsFileProcessor
             }
 
 
-            var regexOptions = LoadRegexOptions(jsonFilePath);
-            RegexOptionsJson selectedOption = SelectRegexOption(regexOptions);
+            List<RegexOptionsJson> regexOptions = LoadRegexOptions(jsonFilePath);
+            RegexOptionsJson? selectedOption;
+            if (string.IsNullOrEmpty(regexName))
+            {
+                selectedOption = SelectRegexOption(regexOptions);
+            }
+            else
+            {
+                selectedOption = regexOptions.FirstOrDefault(x => x.Name == regexName);
+                if(selectedOption == null)
+                {
+                    selectedOption = SelectRegexOption(regexOptions);
+                }
+            }
 
             new FileHandler(sourceDirectory, targetDirectory, selectedOption).HandleFiles();
         }

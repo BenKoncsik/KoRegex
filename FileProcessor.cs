@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace CsFileProcessor
+namespace KoRegex
 {
     public partial class FileProcessor
     {
