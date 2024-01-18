@@ -5,80 +5,87 @@ namespace KoRegex
 {
     public class Start
     {
-        private static string jsonFilePath = "./Regex/Regex.json";
-        private static string sourceDirectory = "";
-        private static string targetDirectory = "";
-        private static string regexName = "";
+        private static string JsonFilePath = "./Regex/Regex.json";
+        private static string SourceDirectory = "";
+        private static string TargetDirectory = "";
+        private static string RegexName = "";
+        public static bool Silent { get; set; } = false;
         public Start(string[] args) {
             foreach (string arg in args)
             {
                 if (arg.StartsWith("-path") || arg.StartsWith("-p"))
                 {
                     int index = Array.IndexOf(args, arg);
-                    sourceDirectory = index + 1 < args.Length ? args[index + 1] : "";
+                    SourceDirectory = index + 1 < args.Length ? args[index + 1] : "";
                 }
                 else if (arg.StartsWith("-regexjson") || arg.StartsWith("-rj"))
                 {
                     int index = Array.IndexOf(args, arg);
-                    jsonFilePath = index + 1 < args.Length ? args[index + 1] : jsonFilePath;
+                    JsonFilePath = index + 1 < args.Length ? args[index + 1] : JsonFilePath;
                 }
                 else if (arg.StartsWith("-o") || arg.StartsWith("-output"))
                 {
                     int index = Array.IndexOf(args, arg);
-                    targetDirectory = index + 1 < args.Length ? args[index + 1] : "";
+                    TargetDirectory = index + 1 < args.Length ? args[index + 1] : "";
                 }
 
                 else if (arg.StartsWith("-rn") || arg.StartsWith("-regexname"))
                 {
                     int index = Array.IndexOf(args, arg);
-                    regexName = index + 1 < args.Length ? args[index + 1] : "";
+                    RegexName = index + 1 < args.Length ? args[index + 1] : "";
+                }
+
+
+                else if (arg.StartsWith("-s") || arg.StartsWith("-Silent"))
+                {
+                    Silent = true;
                 }
             }
 
-            if (string.IsNullOrEmpty(sourceDirectory))
+            if (string.IsNullOrEmpty(SourceDirectory))
             {
                 Console.Write("Please enter the source directory path: ");
-                sourceDirectory = Console.ReadLine();
+                SourceDirectory = Console.ReadLine();
             }
 
-             if (string.IsNullOrEmpty(targetDirectory))
+             if (string.IsNullOrEmpty(TargetDirectory))
             {
                 Console.Write("Please enter the source directory path (If it is left empty it will put it in the source directory/Debug map by default): ");
-                targetDirectory = Console.ReadLine();
+                TargetDirectory = Console.ReadLine();
             }
 
-            if (string.IsNullOrEmpty(targetDirectory))
+            if (string.IsNullOrEmpty(TargetDirectory))
             {
-                targetDirectory = sourceDirectory + "/Debug";
+                TargetDirectory = SourceDirectory + "/Debug";
             }
 
-            if (!Directory.Exists(targetDirectory))
+            if (!Directory.Exists(TargetDirectory))
             {
-                Console.WriteLine($"The target directory does not exist, creating it: {targetDirectory}");
-                Directory.CreateDirectory(targetDirectory);
+                Console.WriteLine($"The target directory does not exist, creating it: {TargetDirectory}");
+                Directory.CreateDirectory(TargetDirectory);
             }
             else
             {
-                ClearDirectory(targetDirectory);
+                ClearDirectory(TargetDirectory);
             }
 
 
-            List<RegexOptionsJson> regexOptions = LoadRegexOptions(jsonFilePath);
+            List<RegexOptionsJson> regexOptions = LoadRegexOptions(JsonFilePath);
             RegexOptionsJson? selectedOption;
-            if (string.IsNullOrEmpty(regexName))
+            if (string.IsNullOrEmpty(RegexName))
             {
                 selectedOption = SelectRegexOption(regexOptions);
             }
             else
             {
-                selectedOption = regexOptions.FirstOrDefault(x => x.Name == regexName);
+                selectedOption = regexOptions.FirstOrDefault(x => x.Name == RegexName);
                 if(selectedOption == null)
                 {
                     selectedOption = SelectRegexOption(regexOptions);
                 }
             }
 
-            new FileHandler(sourceDirectory, targetDirectory, selectedOption).HandleFiles();
+            new FileHandler(SourceDirectory, TargetDirectory, selectedOption).HandleFiles();
         }
 
         private static void ClearDirectory(string path)

@@ -31,7 +31,7 @@ namespace KoRegex
             {
                 ProcessSingleFile(file);
                 fileIndex++;
-                UpdateProgress(fileIndex, totalFiles);
+               if(!Start.Silent) UpdateProgress(fileIndex, totalFiles);
             }
 
             stopwatch.Stop();
